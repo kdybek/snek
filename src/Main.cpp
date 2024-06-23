@@ -7,7 +7,7 @@
 #include "WindowsConsoleScreenBuffer.h"
 #include "SnekExcept.h"
 
-void renderFrame(Map& map, WindowsConsoleScreenBuffer& buffer, Direction& direction)
+void renderFrame(Map& map, WindowsConsoleScreenBuffer& buffer, Direction& direction, float& speedup)
 {
     if (_kbhit()) {
         char dirChar = static_cast<char>(_getch_nolock());
@@ -16,24 +16,25 @@ void renderFrame(Map& map, WindowsConsoleScreenBuffer& buffer, Direction& direct
         }
     }
 
-    map.update(direction);
+    map.update(direction, speedup);
     buffer.drawMap(map);
     buffer.activate();
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<unsigned short>(std::ceil(120.f / speedup))));
 }
 
 void gameLoop()
 {
     Map map;
     Direction direction = Direction::East;
+    float speedup = 1.f;
 
     WindowsConsoleScreenBuffer buf1;
     WindowsConsoleScreenBuffer buf2;
 
     try {
         while (true) {
-            renderFrame(map, buf1, direction);
-            renderFrame(map, buf2, direction);
+            renderFrame(map, buf1, direction, speedup);
+            renderFrame(map, buf2, direction, speedup);
         }
     } catch (const SnekDeath& e) {
 

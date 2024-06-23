@@ -37,7 +37,7 @@ Map::Map() : m_map(), m_snek(2, 2, Direction::East)
     placeNewFruit();
 }
 
-void Map::update(Direction dir)
+void Map::update(Direction dir, float& speedup)
 {
     clearSnek();
 
@@ -51,7 +51,15 @@ void Map::update(Direction dir)
 
     drawSnek();
 
-    if (fruit) { placeNewFruit(); }
+    if (fruit) {
+        speedup *= 1.02f;
+        placeNewFruit();
+    }
+}
+
+char Map::operator()(unsigned short x, unsigned short y) const
+{
+    return m_map[x][y];
 }
 
 void Map::clearSnek()

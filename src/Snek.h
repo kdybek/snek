@@ -7,13 +7,11 @@
 
 #include "Utility.h"
 
-#define HEAD 's'
-
 class Snek
 {
 public:
     Snek(unsigned short x, unsigned short y, Direction startDir)
-            : m_head({x, y, HEAD}), m_tail(), m_dir(startDir)
+            : m_head({x, y, SNEK_HEAD}), m_tail(), m_dir(startDir)
     {
     }
 

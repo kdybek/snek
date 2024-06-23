@@ -7,21 +7,14 @@
 
 #include "Snek.h"
 
-#define MAP_WIDTH 50
-#define MAP_HEIGHT 30
-#define BACKGROUND ' '
-#define BORDER '#'
-#define FRUIT '@'
-
 class Map
 {
 public:
     Map();
 
-    void update(Direction dir);
+    void update(Direction dir, float& speedup);
 
-    inline char operator()(unsigned short x, unsigned short y) const
-    { return m_map[x][y]; }
+    char operator()(unsigned short x, unsigned short y) const;
 
 private:
     std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> m_map;
