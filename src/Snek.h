@@ -3,10 +3,11 @@
 
 
 #include <list>
+#include <algorithm>
 
 #include "Utility.h"
 
-#define HEAD 'o'
+#define HEAD 's'
 
 namespace snek
 {
@@ -29,26 +30,26 @@ namespace snek
             return m_tail;
         }
 
-        void move(Direction newDir)
+        void move(Direction newDir, short minX, short maxX, short minY, short maxY)
         {
             m_tail.push_front({.x=m_head.x,
-                               .y=m_head.y,
-                               .c=dirToSnekTail(m_dir, newDir)});
+                                      .y=m_head.y,
+                                      .c=dirToSnekTail(m_dir, newDir)});
 
             m_dir = newDir;
 
             switch (newDir) {
                 case Direction::East:
-                    ++m_head.x;
+                    m_head.x == maxX ? m_head.x = minX : ++m_head.x;
                     break;
                 case Direction::West:
-                    --m_head.x;
+                    m_head.x == minX ? m_head.x = maxX : --m_head.x;
                     break;
                 case Direction::North:
-                    --m_head.y;
+                    m_head.y == minY ? m_head.y = maxY : --m_head.y;
                     break;
                 case Direction::South:
-                    ++m_head.y;
+                    m_head.y == maxY ? m_head.y = minY : ++m_head.y;
                     break;
             }
         }
@@ -58,6 +59,14 @@ namespace snek
             assert(!m_tail.empty());
 
             m_tail.pop_back();
+        }
+
+        [[nodiscard]] bool collisionCheck() const
+        {
+            return std::ranges::any_of(m_tail, [&](const snekPart_t& part)
+            {
+                return part.x == m_head.x && part.y == m_head.y;
+            });
         }
 
     private:

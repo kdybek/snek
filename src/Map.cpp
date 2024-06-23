@@ -5,9 +5,9 @@ namespace snek
 
     Map::Map() : m_map(), m_snek(2, 2, Direction::East)
     {
-        for (unsigned int i = 0; i < MAP_HEIGHT; i++) {
-            for (unsigned int j = 0; j < MAP_WIDTH; j++) {
-                if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1) {
+        for (short i = 0; i < MAP_WIDTH; i++) {
+            for (short j = 0; j < MAP_HEIGHT; j++) {
+                if (i == 0 || i == MAP_WIDTH - 1 || j == 0 || j == MAP_HEIGHT - 1) {
                     m_map[i][j] = BORDER;
                 }
                 else {
@@ -15,26 +15,22 @@ namespace snek
                 }
             }
         }
+
+        m_map[4][4] = FRUIT;
+        m_map[9][9] = FRUIT;
+        m_map[4][10] = FRUIT;
+        m_map[20][4] = FRUIT;
+        m_map[5][20] = FRUIT;
     }
 
-    void Map::update(Direction dir)
+    bool Map::update(Direction dir)
     {
         clearSnek();
-        m_snek.move(dir);
+        m_snek.move(dir, 1, MAP_WIDTH - 2, 1, MAP_HEIGHT - 2);
         if (cAccessSnekPart(m_snek.getHead()) != FRUIT) { m_snek.shorten(); }
+        if (m_snek.collisionCheck()) { return false; }
         drawSnek();
-    }
-
-    std::ostream& operator<<(std::ostream& os, const Map& map)
-    {
-        for (const auto& row : map.m_map) {
-            for (char c : row) {
-                os << c;
-            }
-            os << '\n';
-        }
-
-        return os;
+        return true;
     }
 
     void Map::clearSnek()
@@ -55,12 +51,12 @@ namespace snek
 
     char& Map::accessSnekPart(const snekPart_t& snekPart)
     {
-        return m_map[snekPart.y][snekPart.x];
+        return m_map[snekPart.x][snekPart.y];
     }
 
     char Map::cAccessSnekPart(const snekPart_t& snekPart)
     {
-        return m_map[snekPart.y][snekPart.x];
+        return m_map[snekPart.x][snekPart.y];
     }
 
 } // snek

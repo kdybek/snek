@@ -7,7 +7,7 @@
 
 #include "Snek.h"
 
-#define MAP_WIDTH 100
+#define MAP_WIDTH 50
 #define MAP_HEIGHT 30
 #define BACKGROUND ' '
 #define BORDER '#'
@@ -21,12 +21,12 @@ namespace snek
     public:
         Map();
 
-        void update(Direction dir);
+        bool update(Direction dir);
 
-        friend std::ostream& operator<<(std::ostream& os, const Map& map);
+        inline char operator()(unsigned short x, unsigned short y) const { return m_map[x][y]; }
 
     private:
-        std::array<std::array<char, MAP_WIDTH>, MAP_HEIGHT> m_map;
+        std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> m_map;
         Snek m_snek;
 
         void clearSnek();
