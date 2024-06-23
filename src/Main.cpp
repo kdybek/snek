@@ -7,12 +7,12 @@
 #include "WindowsConsoleScreenBuffer.h"
 #include "SnekExcept.h"
 
-void renderFrame(snek::Map& map, snek::WindowsConsoleScreenBuffer& buffer, snek::Direction& direction)
+void renderFrame(Map& map, WindowsConsoleScreenBuffer& buffer, Direction& direction)
 {
     if (_kbhit()) {
         char dirChar = static_cast<char>(_getch_nolock());
-        if (snek::validDirection(dirChar)) {
-            direction = snek::charToDir(dirChar);
+        if (validDirection(dirChar)) {
+            direction = charToDir(dirChar);
         }
     }
 
@@ -24,11 +24,11 @@ void renderFrame(snek::Map& map, snek::WindowsConsoleScreenBuffer& buffer, snek:
 
 void gameLoop()
 {
-    snek::Map map;
-    snek::Direction direction = snek::Direction::East;
+    Map map;
+    Direction direction = Direction::East;
 
-    snek::WindowsConsoleScreenBuffer buf1;
-    snek::WindowsConsoleScreenBuffer buf2;
+    WindowsConsoleScreenBuffer buf1;
+    WindowsConsoleScreenBuffer buf2;
 
     try {
         while (true) {
