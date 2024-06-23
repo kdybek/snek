@@ -7,6 +7,7 @@ add_executable(snek
         src/main.cpp
         src/Map.cpp
         src/Map.h
-        src/Snek.h
+        src/snek.h
         src/Utility.h
-        src/WindowsConsoleScreenBuffer.h)
+        src/WindowsConsoleScreenBuffer.h
+        src/SnekExcept.h)

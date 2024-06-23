@@ -3,9 +3,9 @@
 
 
 #include <windows.h>
-#include <exception>
 
 #include "Map.h"
+#include "SnekExcept.h"
 
 namespace snek
 {
@@ -22,7 +22,7 @@ namespace snek
         ))
         {
             if (m_handle == INVALID_HANDLE_VALUE) {
-                throw std::exception("error creating screen buffer");
+                throw SnekException("error creating screen buffer");
             }
         }
 
@@ -54,7 +54,7 @@ namespace snek
     private:
         HANDLE m_handle;
 
-    }; // WindowsConsoleScreenBuffer
+    };
 
 } // snek
 

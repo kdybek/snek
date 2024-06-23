@@ -5,8 +5,22 @@
 
 #include "Map.h"
 #include "WindowsConsoleScreenBuffer.h"
+#include "SnekExcept.h"
 
+void renderFrame(snek::Map& map, snek::WindowsConsoleScreenBuffer& buffer, snek::Direction& direction)
+{
+    if (_kbhit()) {
+        char dirChar = static_cast<char>(_getch_nolock());
+        if (snek::validDirection(dirChar)) {
+            direction = snek::charToDir(dirChar);
+        }
+    }
 
+    map.update(direction);
+    buffer.drawMap(map);
+    buffer.activate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
 
 void gameLoop()
 {
@@ -16,30 +30,13 @@ void gameLoop()
     snek::WindowsConsoleScreenBuffer buf1;
     snek::WindowsConsoleScreenBuffer buf2;
 
-    while (true) {
-        if (_kbhit()) {
-            char dirChar = static_cast<char>(_getch_nolock());
-            if (snek::validDirection(dirChar)) {
-                direction = snek::charToDir(dirChar);
-            }
+    try {
+        while (true) {
+            renderFrame(map, buf1, direction);
+            renderFrame(map, buf2, direction);
         }
+    } catch (const SnekDeath& e) {
 
-        if (!map.update(direction)) return;
-        buf1.drawMap(map);
-        buf1.activate();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-        if (_kbhit()) {
-            char dirChar = static_cast<char>(_getch_nolock());
-            if (snek::validDirection(dirChar)) {
-                direction = snek::charToDir(dirChar);
-            }
-        }
-
-        if (!map.update(direction)) return;
-        buf2.drawMap(map);
-        buf2.activate();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 

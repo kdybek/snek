@@ -5,7 +5,7 @@
 #include <array>
 #include <ostream>
 
-#include "Snek.h"
+#include "snek.h"
 
 #define MAP_WIDTH 50
 #define MAP_HEIGHT 30
@@ -21,7 +21,7 @@ namespace snek
     public:
         Map();
 
-        bool update(Direction dir);
+        void update(Direction dir);
 
         inline char operator()(unsigned short x, unsigned short y) const { return m_map[x][y]; }
 
@@ -33,11 +33,13 @@ namespace snek
 
         void drawSnek();
 
+        void placeNewFruit();
+
         char& accessSnekPart(const snekPart_t& snekPart);
 
         char cAccessSnekPart(const snekPart_t& snekPart);
 
-    }; // Map
+    };
 
 } // snek
 

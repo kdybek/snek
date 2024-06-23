@@ -30,11 +30,14 @@ namespace snek
             return m_tail;
         }
 
+        [[nodiscard]] unsigned int length() const
+        {
+            return m_tail.size() + 1;
+        }
+
         void move(Direction newDir, short minX, short maxX, short minY, short maxY)
         {
-            m_tail.push_front({.x=m_head.x,
-                                      .y=m_head.y,
-                                      .c=dirToSnekTail(m_dir, newDir)});
+            m_tail.push_front({.x=m_head.x, .y=m_head.y, .c=dirToSnekTail(m_dir, newDir)});
 
             m_dir = newDir;
 
@@ -74,7 +77,7 @@ namespace snek
         std::list<snekPart_t> m_tail;
         Direction m_dir;
 
-    }; // Snek
+    };
 
 } // snek
 
