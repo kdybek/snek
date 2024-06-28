@@ -44,6 +44,4 @@ void gameLoop()
 int main()
 {
     gameLoop();
-
-    return 0;
 }

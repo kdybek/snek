@@ -17,6 +17,8 @@ public:
 
     char operator()(unsigned short x, unsigned short y) const;
 
+    [[nodiscard]] std::string rowToString(unsigned short row) const;
+
 private:
     std::array<std::array<char, g_mapHeight>, g_mapWidth> m_map;
     Snek m_snek;

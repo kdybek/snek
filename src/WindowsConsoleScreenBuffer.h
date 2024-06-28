@@ -34,12 +34,10 @@ public:
 
     void drawMap(const Map& map)
     {
-        for (SHORT i = 0; i < g_mapWidth; ++i) {
-            for (SHORT j = 0; j < g_mapHeight; ++j) {
-                CHAR c = map(i, j);
-                DWORD charsWritten;
-                WriteConsoleOutputCharacter(m_handle, &c, 1, {static_cast<SHORT>(2 * i), j}, &charsWritten);
-            }
+        for (SHORT i = 0; i < g_mapHeight; ++i) {
+            std::string terminalRowOutput = map.rowToString(i);
+            DWORD charsWritten;
+            WriteConsoleOutputCharacter(m_handle, terminalRowOutput.c_str(), terminalRowOutput.size(), {0, i}, &charsWritten);
         }
     }
 

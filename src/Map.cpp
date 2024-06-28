@@ -62,6 +62,19 @@ char Map::operator()(unsigned short x, unsigned short y) const
     return m_map[x][y];
 }
 
+
+std::string Map::rowToString(unsigned short row) const
+{
+    std::string buffer;
+
+    for (unsigned int i = 0; i < g_mapWidth; ++i) {
+        buffer += (*this)(i, row);
+        buffer += ' ';
+    }
+
+    return buffer;
+}
+
 void Map::clearSnek()
 {
     accessSnekPart(m_snek.getHead()) = g_backgroundChar;
