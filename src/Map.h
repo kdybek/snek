@@ -5,6 +5,7 @@
 #include <array>
 #include <ostream>
 
+#include "Constants.h"
 #include "Snek.h"
 
 class Map
@@ -17,7 +18,7 @@ public:
     char operator()(unsigned short x, unsigned short y) const;
 
 private:
-    std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> m_map;
+    std::array<std::array<char, g_mapHeight>, g_mapWidth> m_map;
     Snek m_snek;
 
     void clearSnek();

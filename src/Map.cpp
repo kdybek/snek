@@ -21,13 +21,13 @@ namespace
 
 Map::Map() : m_map(), m_snek(2, 2, Direction::East)
 {
-    for (unsigned short i = 0; i < MAP_WIDTH; i++) {
-        for (unsigned short j = 0; j < MAP_HEIGHT; j++) {
-            if (i == 0 || i == MAP_WIDTH - 1 || j == 0 || j == MAP_HEIGHT - 1) {
-                m_map[i][j] = BORDER;
+    for (unsigned short i = 0; i < g_mapWidth; i++) {
+        for (unsigned short j = 0; j < g_mapHeight; j++) {
+            if (i == 0 || i == g_mapWidth - 1 || j == 0 || j == g_mapHeight - 1) {
+                m_map[i][j] = g_borderChar;
             }
             else {
-                m_map[i][j] = BACKGROUND;
+                m_map[i][j] = g_backgroundChar;
             }
         }
     }
@@ -41,9 +41,9 @@ void Map::update(Direction dir, float& speedup)
 {
     clearSnek();
 
-    m_snek.move(dir, 1, MAP_WIDTH - 2, 1, MAP_HEIGHT - 2);
+    m_snek.move(dir, 1, g_mapWidth - 2, 1, g_mapHeight - 2);
 
-    bool fruit = cAccessSnekPart(m_snek.getHead()) == FRUIT;
+    bool fruit = cAccessSnekPart(m_snek.getHead()) == g_fruitChar;
 
     if (!fruit) { m_snek.shorten(); }
 
@@ -64,10 +64,10 @@ char Map::operator()(unsigned short x, unsigned short y) const
 
 void Map::clearSnek()
 {
-    accessSnekPart(m_snek.getHead()) = BACKGROUND;
+    accessSnekPart(m_snek.getHead()) = g_backgroundChar;
 
     for (const auto& part: m_snek.getTail()) {
-        accessSnekPart(part) = BACKGROUND;
+        accessSnekPart(part) = g_backgroundChar;
     }
 }
 
@@ -82,16 +82,16 @@ void Map::drawSnek()
 
 void Map::placeNewFruit()
 {
-    unsigned int nFreeSquares = (MAP_WIDTH - 2) * (MAP_HEIGHT - 2) - m_snek.length();
+    unsigned int nFreeSquares = (g_mapWidth - 2) * (g_mapHeight - 2) - m_snek.length();
 
     if (nFreeSquares == 0) { return; } // No fruits can be placed.
 
     int randomNum = generateRandomNumber(static_cast<int>(nFreeSquares - 1));
 
-    for (unsigned short i = 0; i < MAP_WIDTH; i++) {
-        for (unsigned short j = 0; j < MAP_HEIGHT; j++) {
-            if (m_map[i][j] == BACKGROUND && randomNum-- == 0) {
-                m_map[i][j] = FRUIT;
+    for (unsigned short i = 0; i < g_mapWidth; i++) {
+        for (unsigned short j = 0; j < g_mapHeight; j++) {
+            if (m_map[i][j] == g_backgroundChar && randomNum-- == 0) {
+                m_map[i][j] = g_fruitChar;
                 return;
             }
         }

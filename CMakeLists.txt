@@ -10,4 +10,6 @@ add_executable(snek
         src/Snek.h
         src/Utility.h
         src/WindowsConsoleScreenBuffer.h
-        src/SnekExcept.h)
+        src/SnekExcept.h
+        src/Constants.h
+        src/Constants.h)

@@ -4,13 +4,6 @@
 
 #include <cassert>
 
-#define MAP_WIDTH 50
-#define MAP_HEIGHT 30
-#define BACKGROUND ' '
-#define BORDER '#'
-#define FRUIT '@'
-#define SNEK_HEAD 's'
-
 struct snekPart_t
 {
     unsigned short x;

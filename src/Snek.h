@@ -5,13 +5,14 @@
 #include <list>
 #include <algorithm>
 
+#include "Constants.h"
 #include "Utility.h"
 
 class Snek
 {
 public:
     Snek(unsigned short x, unsigned short y, Direction startDir)
-            : m_head({x, y, SNEK_HEAD}), m_tail(), m_dir(startDir)
+            : m_head({x, y, g_snekHead}), m_tail(), m_dir(startDir)
     {
     }
 
