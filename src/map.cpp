@@ -1,8 +1,8 @@
-#include "Map.h"
+#include "map.h"
 
 #include <random>
 
-#include "SnekExcept.h"
+#include "snek_except.h"
 
 namespace
 {

@@ -1,5 +1,5 @@
-#ifndef SNEK_SNEKEXCEPT_H
-#define SNEK_SNEKEXCEPT_H
+#ifndef SNEK_SNEK_EXCEPT_H
+#define SNEK_SNEK_EXCEPT_H
 
 
 #include <exception>
@@ -37,4 +37,4 @@ public:
 
 
 
-#endif // SNEK_SNEKEXCEPT_H
+#endif // SNEK_SNEK_EXCEPT_H

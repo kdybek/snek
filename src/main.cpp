@@ -3,9 +3,9 @@
 #include <chrono>
 #include <thread>
 
-#include "Map.h"
-#include "WindowsConsoleScreenBuffer.h"
-#include "SnekExcept.h"
+#include "map.h"
+#include "windows_console_screen_buffer.h"
+#include "snek_except.h"
 
 void renderFrame(Map& map, WindowsConsoleScreenBuffer& buffer, Direction& direction, float& speedup)
 {

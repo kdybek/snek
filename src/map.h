@@ -5,8 +5,8 @@
 #include <array>
 #include <ostream>
 
-#include "Constants.h"
-#include "Snek.h"
+#include "constants.h"
+#include "snek.h"
 
 class Map
 {

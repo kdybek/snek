@@ -1,11 +1,11 @@
-#ifndef SNEK_WINDOWSCONSOLESCREENBUFFER_H
-#define SNEK_WINDOWSCONSOLESCREENBUFFER_H
+#ifndef SNEK_WINDOWS_CONSOLE_SCREEN_BUFFER_H
+#define SNEK_WINDOWS_CONSOLE_SCREEN_BUFFER_H
 
 
 #include <windows.h>
 
-#include "Map.h"
-#include "SnekExcept.h"
+#include "map.h"
+#include "snek_except.h"
 
 class WindowsConsoleScreenBuffer
 {
@@ -52,4 +52,4 @@ private:
 };
 
 
-#endif // SNEK_WINDOWSCONSOLESCREENBUFFER_H
+#endif // SNEK_WINDOWS_CONSOLE_SCREEN_BUFFER_H

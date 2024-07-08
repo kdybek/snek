@@ -5,8 +5,8 @@
 #include <list>
 #include <algorithm>
 
-#include "Constants.h"
-#include "Utility.h"
+#include "constants.h"
+#include "utility.h"
 
 class Snek
 {
