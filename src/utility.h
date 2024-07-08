@@ -62,8 +62,10 @@ inline char dirToSnekTail(Direction prevDir, Direction newDir)
             if (prevDir == Direction::West) { return '/'; }
             return '|';
     }
+
     assert(false);
-    // Silence warnings.
+
+    // Return something to silence warnings.
     return ' ';
 }
 
